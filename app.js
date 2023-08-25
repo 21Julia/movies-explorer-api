@@ -7,12 +7,12 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
 
-const { limiter } = require('./utils/constants');
+const { DEFAULT_ADDRESS, limiter } = require('./utils/constants');
 const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 
-const { PORT = 3000, SERVER_ADDRESS = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
+const { NODE_ENV, PORT = 3000, SERVER_ADDRESS } = process.env;
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-mongoose.connect(SERVER_ADDRESS);
+mongoose.connect(NODE_ENV === 'production' ? SERVER_ADDRESS : DEFAULT_ADDRESS);
 
 app.use(requestLogger);
 app.use(routes);
