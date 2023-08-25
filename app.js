@@ -18,8 +18,7 @@ const app = express();
 
 app.use(cors({
   origin: [
-    // 'https://juliak.nomoreparties.co',
-    // 'http://juliak.nomoreparties.co',
+    'https://jkmovies-explorer.nomoredomainsicu.ru',
     'http://localhost:3000',
   ],
   credentials: true,
