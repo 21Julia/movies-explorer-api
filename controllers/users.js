@@ -51,7 +51,6 @@ module.exports.login = (req, res, next) => {
           sameSite: true,
         })
         .send({
-          token,
           _id: user._id,
           email: user.email,
           name: user.name,
